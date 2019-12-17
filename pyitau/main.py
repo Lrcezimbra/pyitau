@@ -109,9 +109,9 @@ class Itau:
         auth_token = re.search("authToken=\\'(.*?)\\';", response.text).group(1)
         self._session.cookies.set('X-AUTH-TOKEN', auth_token)
 
-        self._op2 = re.search("\$SECAPDK.uidap\(\'(.*?)\'\);", response.text).group(1)
-        self._op3 = re.search("\$SECBCATCH.uidap\(\'(.*)\'\);", response.text).group(1)
-        self._op4 = re.search('router.performRequest\("(.*?)", ', response.text).group(1)
+        self._op2 = re.search(r"\$SECAPDK.uidap\(\'(.*?)\'\);", response.text).group(1)
+        self._op3 = re.search(r"\$SECBCATCH.uidap\(\'(.*)\'\);", response.text).group(1)
+        self._op4 = re.search(r'router.performRequest\("(.*?)", ', response.text).group(1)
         self._flow_id = re.search("var flowId=\'(.*)\';", response.text).group(1)
         self._client_id = re.search("var clientId=\'(.*?)\';", response.text).group(1)
 
@@ -136,7 +136,7 @@ class Itau:
         self._op5 = re.search('__opSignCommand = "(.*?)";', response.text).group(1)
         self._op6 = re.search('__opMaquinaPirata = "(.*?)";', response.text).group(1)
         self._op7 = re.search(
-            'var guardiao_cb = function\(\) {\n\t\t\tloadPage\(\'(.*?)\'\);',
+            r'var guardiao_cb = function\(\) {\n\t\t\tloadPage\(\'(.*?)\'\);',
             response.text
         ).group(1)
 
